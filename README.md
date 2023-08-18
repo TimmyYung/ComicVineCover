@@ -1,5 +1,7 @@
 # ComicVineCover
 
+![ComicVineCover Logo](images/logo.png)
+
 ComicVineCover is a Python program that uses web scraping to effortlessly fetch comic book and manga covers from Comic Vine.
 
 ## How It Works
