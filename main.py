@@ -23,7 +23,7 @@ layout = [
         [sg.Button("OK", font=("Helvetica Neue", 14), button_color=(button_text_color, button_bg_color), border_width=0),
          sg.Button("Cancel", font=("Helvetica Neue", 14), button_color=(button_text_color, button_bg_color), border_width=0)],
     ], justification='center')],
-    [sg.Column([[sg.Image(filename='placeholder_image (Small).png')]], element_justification='center')],
+    [sg.Column([[sg.Image(filename='images/placeholder_image (Small).png')]], element_justification='center')],
 ]
 
 window = sg.Window("ComicVine Cover Downloader", layout)
