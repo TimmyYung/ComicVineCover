@@ -36,8 +36,7 @@ while True:
     elif event == 'OK':
         selected_folder = values['-FOLDER-']
         comic_vine_link = values['-LINK-']
-        sg.popup(f"You selected folder: {selected_folder}\nComic Vine Link: {comic_vine_link}")
-        all_images = downloader.get_images(comic_vine_link)  # Call the hello() function from downloader.py
+        all_images = downloader.get_images(comic_vine_link)
         downloader.download_image(selected_folder, all_images)
 
         break
