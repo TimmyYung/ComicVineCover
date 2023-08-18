@@ -6,7 +6,7 @@ ComicVineCover is a Python program that uses web scraping to effortlessly fetch 
 
 ComicVineCover employs Python libraries like Beautiful Soup and Requests to navigate Comic Vine's website, locate cover images, and download them to your designated directory.
 
-![Example Image](images/program.png)
+![Example Image](images/program.PNG)
 
 ## Usage
 
