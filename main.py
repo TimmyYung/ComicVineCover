@@ -24,7 +24,9 @@ layout = [
          sg.Button("Cancel", font=("Helvetica Neue", 14), button_color=(button_text_color, button_bg_color), border_width=0)],
     ], justification='center')],
     [sg.Column([[sg.Image(filename='images/placeholder_image (Small).png')]], element_justification='center')],
+    [sg.ProgressBar(100, orientation='h', size=(40, 20), key='-PROGRESS-')],
 ]
+
 
 window = sg.Window("ComicVine Cover Downloader", layout)
 
@@ -36,9 +38,17 @@ while True:
     elif event == 'OK':
         selected_folder = values['-FOLDER-']
         comic_vine_link = values['-LINK-']
-        all_images = downloader.get_images(comic_vine_link)
-        downloader.download_image(selected_folder, all_images)
 
+        progress_bar = window['-PROGRESS-']
+        progress_bar.update(0)  # Set initial progress to 0%
+
+        all_images = downloader.get_images(comic_vine_link)
+        total_images = len(all_images)
+
+        downloader.download_image(selected_folder, all_images)  # Download all images
+
+        sg.popup_quick_message("Download completed", background_color=bg_color, text_color=text_color)
         break
+
 
 window.close()
