@@ -6,17 +6,29 @@ import requests
 import shutil
 
 def get_images(url):
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
-    results = soup.find_all("div", {"class": "imgboxart"})
-    links = []
-    for div in results:
-        img_tag = div.find('img')
-        if img_tag:
-            link = img_tag['src']
-            link = link.replace("scale_small", "scale_large")
-            links.append(link)
-    return links
+    all_links = []
+    page_number = 1
+    while True:
+        page_url = f"{url}/?page={page_number}"
+        page = requests.get(page_url)
+        soup = BeautifulSoup(page.content, "html.parser")
+        results = soup.find_all("div", {"class": "imgboxart"})
+        
+        if not results:
+            break  # Break the loop if no more imgboxart divs are found
+        
+        links = []
+        for div in results:
+            img_tag = div.find('img')
+            if img_tag:
+                link = img_tag['src']
+                link = link.replace("scale_small", "scale_large")
+                links.append(link)
+        
+        all_links.extend(links)
+        page_number += 1
+    
+    return all_links
 
 
 def download_image(output_folder, list_of_images):
