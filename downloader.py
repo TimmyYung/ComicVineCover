@@ -7,16 +7,18 @@ import shutil
 
 def get_images(url):
     all_links = []
-    page_number = 1
+    page_number = 1  # Always start from page 1
+    base_url = url.split('?')[0]  # Extract the base URL without query parameters
+
     while True:
-        page_url = f"{url}/?page={page_number}"
+        page_url = f"{base_url}?page={page_number}"  # Construct the URL with the desired page number
         page = requests.get(page_url)
         soup = BeautifulSoup(page.content, "html.parser")
         results = soup.find_all("div", {"class": "imgboxart"})
-        
+
         if not results:
             break  # Break the loop if no more imgboxart divs are found
-        
+
         links = []
         for div in results:
             img_tag = div.find('img')
@@ -24,10 +26,10 @@ def get_images(url):
                 link = img_tag['src']
                 link = link.replace("scale_small", "scale_large")
                 links.append(link)
-        
+
         all_links.extend(links)
         page_number += 1
-    
+
     return all_links
 
 
